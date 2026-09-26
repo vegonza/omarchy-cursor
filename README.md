@@ -17,7 +17,8 @@ most-recent-first order. It supports:
 ## Requirements
 
 - Omarchy 4.0 or newer (the Quattro/Quickshell plugin system)
-- Cursor with the `cursor` command available
+- Cursor installed from the standard Omarchy/Arch package (the plugin launches
+  `/usr/share/cursor/cursor` directly to avoid conflicting Cursor Agent shims)
 - Python 3 (included with Omarchy)
 
 ## Install

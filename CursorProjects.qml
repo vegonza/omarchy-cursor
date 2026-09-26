@@ -42,6 +42,7 @@ Item {
   property int cardHeight: Math.min(Style.space(570), panel.height - Style.gapsOut * 2)
 
   readonly property string helperPath: root.localPath(Qt.resolvedUrl("cursor_projects.py"))
+  readonly property string cursorExecutable: "/usr/share/cursor/cursor"
 
   function localPath(url) {
     var value = String(url || "")
@@ -181,7 +182,7 @@ Item {
   function activateIndex(index) {
     if (index < 0 || index >= displayModel.count) return
     var project = displayModel.get(index)
-    var command = ["uwsm-app", "--", "cursor", "--new-window"]
+    var command = ["uwsm-app", "--", root.cursorExecutable, "--new-window"]
     if (project.remote) command.push("--folder-uri")
     command.push(project.projectTarget)
     root.dismiss()

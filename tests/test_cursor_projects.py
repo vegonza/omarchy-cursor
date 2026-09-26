@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 MODULE_PATH = Path(__file__).parents[1] / "cursor_projects.py"
+QML_PATH = Path(__file__).parents[1] / "CursorProjects.qml"
 SPEC = importlib.util.spec_from_file_location("cursor_projects", MODULE_PATH)
 assert SPEC and SPEC.loader
 cursor_projects = importlib.util.module_from_spec(SPEC)
@@ -14,6 +15,19 @@ SPEC.loader.exec_module(cursor_projects)
 
 
 class CursorProjectsTest(unittest.TestCase):
+    def test_launches_the_ide_without_resolving_the_cursor_agent_shim(self):
+        qml = QML_PATH.read_text(encoding="utf-8")
+
+        self.assertIn(
+            'readonly property string cursorExecutable: "/usr/share/cursor/cursor"',
+            qml,
+        )
+        self.assertIn(
+            '["uwsm-app", "--", root.cursorExecutable, "--new-window"]',
+            qml,
+        )
+        self.assertNotIn('["uwsm-app", "--", "cursor"', qml)
+
     def test_local_remote_workspace_and_deduplication(self):
         with tempfile.TemporaryDirectory() as temporary_dir:
             home = Path(temporary_dir)

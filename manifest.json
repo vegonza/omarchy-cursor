@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "vegonza.omarchy-cursor",
   "name": "Omarchy Cursor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "vegonza",
   "description": "Open recent Cursor projects from a native Omarchy menu",
   "kinds": [
